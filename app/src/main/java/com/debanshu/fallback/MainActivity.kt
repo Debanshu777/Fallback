@@ -1,13 +1,10 @@
 package com.debanshu.fallback
 
-import SMSReceiver
 import android.Manifest
 import com.debanshu.fallback.ui.theme.FallbackTheme
 import android.content.IntentFilter
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.provider.Telephony
 import android.telephony.SmsManager
 import android.view.ViewGroup
@@ -33,7 +30,7 @@ import kotlinx.coroutines.flow.asStateFlow
 class MainActivity : ComponentActivity(), SMSReceiver.SMSListener {
 
     private val SMS_PERMISSION_REQUEST_CODE = 1001
-    private val SERVER_PHONE_NUMBER = "+1234567890"
+    private val SERVER_PHONE_NUMBER = "+18052510397"
     private val smsReceiver = SMSReceiver()
 
 

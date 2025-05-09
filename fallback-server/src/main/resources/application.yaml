@@ -4,3 +4,8 @@ ktor:
             - com.debanshu777.ApplicationKt.module
     deployment:
         port: 8080
+
+twilio:
+    accountSid: ${TWILIO_ACCOUNT_SID}
+    authToken: ${TWILIO_AUTH_TOKEN}
+    phoneNumber: ${TWILIO_PHONE_NUMBER}

@@ -1,3 +1,5 @@
+package com.debanshu.fallback
+
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -11,7 +13,7 @@ class SMSReceiver : BroadcastReceiver() {
     }
 
     companion object {
-        private const val TAG = "SMSReceiver"
+        private const val TAG = "com.debanshu.fallback.SMSReceiver"
         private const val SERVER_PHONE_NUMBER = "+1234567890" // Replace with your actual number
         private const val HTML_PREFIX = "HTML:"
         private const val HTML_PART_PREFIX = "HTML_PART"

@@ -1,4 +1,3 @@
-
 plugins {
     alias(libs.plugins.kotlin.jvm)
     alias(libs.plugins.ktor)
@@ -14,6 +13,13 @@ application {
 repositories {
     mavenCentral()
 }
+ktor {
+    docker {
+        jreVersion.set(JavaVersion.VERSION_17)
+        localImageName.set("fallback-server")
+        imageTag.set("0.0.1")
+    }
+}
 
 dependencies {
     implementation(libs.ktor.server.core)
@@ -23,4 +29,8 @@ dependencies {
     implementation(libs.ktor.server.config.yaml)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
+    implementation(libs.twilio)
+    implementation(libs.jsoup)
+    implementation(libs.ktor.server.content.negotiation)
+    implementation(libs.ktor.serialization.jackson)
 }
