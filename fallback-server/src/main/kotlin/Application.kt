@@ -1,19 +1,14 @@
 package com.debanshu777
 
+import com.debanshu777.service.SearchService
+import com.debanshu777.service.TwilioService
 import com.fasterxml.jackson.databind.SerializationFeature
 import io.ktor.serialization.jackson.jackson
-import service.TwilioService
 import io.ktor.server.application.*
-import io.ktor.server.engine.embeddedServer
-import io.ktor.server.netty.Netty
 import io.ktor.server.plugins.contentnegotiation.ContentNegotiation
 import org.slf4j.LoggerFactory
-import service.SearchService
 
-fun main() {
-    embeddedServer(Netty, port = 8080, host = "0.0.0.0", module = Application::module)
-        .start(wait = true)
-}
+fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
 fun Application.module() {
     val logger = LoggerFactory.getLogger("Application")

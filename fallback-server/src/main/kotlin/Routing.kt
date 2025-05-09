@@ -1,13 +1,13 @@
 package com.debanshu777
 
+import com.debanshu777.service.SearchService
+import com.debanshu777.service.TwilioService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.LoggerFactory
-import service.SearchService
-import service.TwilioService
 
 fun Application.configureRouting(
     twilioService: TwilioService,
