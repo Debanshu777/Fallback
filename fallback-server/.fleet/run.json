@@ -1,0 +1,9 @@
+{
+    "configurations": [
+        {
+            "type": "command",
+            "name": "Gradle Build",
+            "program": "../gradlew build"
+        }
+    ]
+}
