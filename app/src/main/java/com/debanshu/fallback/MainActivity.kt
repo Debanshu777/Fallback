@@ -134,7 +134,7 @@ class MainActivity : ComponentActivity(), SMSReceiver.SMSListener {
     }
 
     override fun onSMSReceived(html: String) {
-        _htmlContent.tryEmit(html)
+        _htmlContent.tryEmit(_htmlContent.value + html)
     }
 
     private fun requestSmsPermissions() {

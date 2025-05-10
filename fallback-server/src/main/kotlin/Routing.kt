@@ -51,11 +51,11 @@ fun Application.configureRouting(
                     val searchResults = searchService.search(query)
 
                     // Send the results back via SMS
-                    twilioService.sendSms(from, searchResults)
+                    twilioService.sendMultipartSms(from, searchResults)
 
                     logger.info("Search results for '$query' sent to $from")
                 } else {
-                    twilioService.sendSms(
+                    twilioService.sendMultipartSms(
                         from,
                         buildEmptyQueryHtml()
                     )
@@ -70,11 +70,11 @@ fun Application.configureRouting(
                     val content = searchService.getContent(url)
 
                     // Send it back via SMS
-                    twilioService.sendSms(from, content)
+                    twilioService.sendMultipartSms(from, content)
 
                     logger.info("Content for '$url' sent to $from")
                 } else {
-                    twilioService.sendSms(
+                    twilioService.sendMultipartSms(
                         from,
                         buildInvalidUrlHtml(url)
                     )
@@ -82,7 +82,7 @@ fun Application.configureRouting(
                 }
             } else {
                 // Unknown command
-                twilioService.sendSms(
+                twilioService.sendMultipartSms(
                     from,
                     buildHelpHtml()
                 )

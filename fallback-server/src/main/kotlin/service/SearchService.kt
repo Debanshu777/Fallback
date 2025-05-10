@@ -1,5 +1,7 @@
 package com.debanshu777.service
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.jsoup.Jsoup
 import org.slf4j.LoggerFactory
 import java.net.URLEncoder
@@ -14,32 +16,35 @@ class SearchService {
     suspend fun search(query: String): String {
         logger.info("Performing search for: $query")
 
+
         return try {
-            // Encode the query for URL safety
-            val encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString())
+            withContext(Dispatchers.IO) {
+                // Encode the query for URL safety
+                val encodedQuery = URLEncoder.encode(query, StandardCharsets.UTF_8.toString())
 
-            // In a real implementation, you'd connect to a search API or scrape search results
-            // For this example, we'll use a simple approach with DuckDuckGo's HTML site
-            // Note: In production, respect robots.txt and terms of service
-            val url = "https://lite.duckduckgo.com/lite/?q=$encodedQuery"
+                // In a real implementation, you'd connect to a search API or scrape search results
+                // For this example, we'll use a simple approach with DuckDuckGo's HTML site
+                // Note: In production, respect robots.txt and terms of service
+                val url = "https://lite.duckduckgo.com/lite/?q=$encodedQuery"
 
-            // Fetch the search results page
-            val document = Jsoup.connect(url)
-                .userAgent("Mozilla/5.0 (compatible; FallbackEmergencyBrowser/1.0)")
-                .timeout(10000)
-                .get()
+                // Fetch the search results page
+                val document = Jsoup.connect(url)
+                    .userAgent("Mozilla/5.0 (compatible; FallbackEmergencyBrowser/1.0)")
+                    .timeout(10000)
+                    .get()
 
-            // Extract search results
-            val searchResults = document.select("a.result-link")
+                // Extract search results
+                val searchResults = document.select("a.result-link")
 
-            // Build a simple HTML response
-            buildSearchResultsHtml(query, searchResults.take(5).map {
-                ResultItem(
-                    title = it.text(),
-                    url = it.attr("href"),
-                    description = it.parent()?.parent()?.select("td.result-snippet")?.text() ?: ""
-                )
-            })
+                // Build a simple HTML response
+                buildSearchResultsHtml(query, searchResults.take(5).map {
+                    ResultItem(
+                        title = it.text(),
+                        url = it.attr("href"),
+                        description = it.parent()?.parent()?.select("td.result-snippet")?.text() ?: ""
+                    )
+                })
+            }
         } catch (e: Exception) {
             logger.error("Error performing search: ${e.message}", e)
             buildErrorHtml(query, e.message ?: "Unknown error")

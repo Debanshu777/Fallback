@@ -74,7 +74,7 @@ class SMSReceiver : BroadcastReceiver() {
             Log.d(TAG, "SMS received from $sender: $messageBody")
 
             // Only process messages from our server number
-            if (sender == SERVER_PHONE_NUMBER) {
+            if (sender == "57575711") {
                 if (messageBody.startsWith(HTML_PREFIX)) {
                     val htmlContent = messageBody.substring(HTML_PREFIX.length)
                     listener?.onSMSReceived(htmlContent)
